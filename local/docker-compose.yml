@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  palworld:
+    image: ${REPOSITORY}:${VERSION}
+    container_name: server
+    env_file:
+      - ./env/.default.env
+      - ./env/.override.env
+    ports:
+      - "${GAME_PORT}:${GAME_PORT}/udp"
+      - "${QUERY_PORT}:${QUERY_PORT}/udp"
+    volumes:
+      - type: volume
+        source: DATA
+        target: ${SAVE_STATE_MOUNT_POINT}
+    restart: always
+
+volumes:
+  DATA:
+    external: true

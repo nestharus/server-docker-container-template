@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  palworld:
+    image: ${MODDED_REPOSITORY}:${VERSION}
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - VANILLA=${VANILLA_REPOSITORY}:${VERSION}
+    volumes:
+      - type: volume
+        source: PALWORLD_DATA
+        target: /palworld/Pal/Saved/SaveGames
+volumes:
+  PALWORLD_DATA:

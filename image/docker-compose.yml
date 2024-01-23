@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  palworld:
+    image: ${REPOSITORY}:${VERSION}
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - SERVER_FILES=${SERVER_FILES}
+        - SAVE_STATE_MOUNT_POINT=${SAVE_STATE_MOUNT_POINT}
+        - SERVER_RUN_LOCATION=${SERVER_RUN_LOCATION}
+        - STEAM_CLIENT=${STEAM_CLIENT}
+        - SETTINGS_FILE=${SETTINGS_FILE}
+    volumes:
+      - type: volume
+        source: DATA
+        target: ${SAVE_STATE_MOUNT_POINT}
+volumes:
+  DATA:
